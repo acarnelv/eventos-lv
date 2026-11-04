@@ -13,6 +13,7 @@
     --c-ponent:#b1dbdb;      /* Ponent */
     --c-moderador:#f8e3ae;   /* Moderador/a */
     --c-presentadora:#f4cfb7;/* Presentadora */
+    --c-curador:#d6cdf0;     /* Curador (Summit IA) */
     --text:#333;
   }
   html,body{margin:0;padding:0;background:#fff;}
@@ -33,6 +34,7 @@
   .t-ponent{background:var(--c-ponent);}
   .t-moderador{background:var(--c-moderador);}
   .t-presentadora{background:var(--c-presentadora);}
+  .t-curador{background:var(--c-curador);}
   @media (max-width:560px){
     h1{font-size:21px;}
     .legend{font-size:13px;}
@@ -48,6 +50,7 @@
 <div class="wrap">
   <h1>Ponentes del Summit IA</h1>
   <div class="legend">
+    <span><i class="t-curador"></i>Curador</span>
     <span><i class="t-ponent"></i>Ponente</span>
     <span><i class="t-presentadora"></i>Presentador</span>
   </div>
@@ -57,17 +60,17 @@
 <script>
 /* ====== DADES DELS PONENTS ======
    Per canviar alguna cosa, només cal tocar aquesta llista.
-   tipus: "lv" (La Vanguardia), "ponent", "moderador", "presentadora"
+   tipus: "lv" (La Vanguardia), "curador", "ponent", "moderador", "presentadora"
    Fotos: carpeta img/summit-ia/
    Al càrrec, "<br>" força un salt de línia. */
 const PONENTS = [
   ["Albert Tort Pugibet","img/summit-ia/albert-tort-pugibet.jpg","Secretario de Telecomunicaciones y Transformación Digital","ponent","Generalitat de Catalunya"],
   ["Jaume Miralles","img/summit-ia/jaume-miralles.jpg","Director general de Inteligencia Artificial, Eficiencia y Datos de la Administración","ponent","Generalitat de Catalunya"],
+  ["Aleix Valls","img/summit-ia/aleix-valls.jpg","Curador del Summit IA y CEO","curador","Weartificial"],
   ["Julián López-Arenas","img/summit-ia/julian-lopez-arenas.jpg","Director de Competitividad","ponent","Cámara de Comercio de España"],
   ["Daniel Martinez","img/summit-ia/daniel-martinez.jpg","SVP y director del Centro Internacional de HP Barcelona y responsable del HP IA Innovation Hub","ponent","HP"],
   ["Alberto López Santamaría","img/summit-ia/alberto-lopez-santamaria.jpg","Director de Data & IA - Capacidades Estructurales de Mapfre España","ponent","MAPFRE"],
   ["Toni Durán","img/summit-ia/toni-duran.jpg","Director de Innovación","ponent","Abertis"],
-  ["Aleix Valls","img/summit-ia/aleix-valls.jpg","Curador del Summit IA y CEO","ponent","Weartificial"],
   ["María García Gutiérrez","img/summit-ia/maria-garcia-gutierrez.jpg","Directora de AI Factory en el área CDO","ponent","Telefónica"],
   ["Miguel Ángel Román","img/summit-ia/miguel-angel-roman.jpg","Cofundador","ponent","Instituto de Inteligencia Artificial (IIA)"],
   ["Diego Perino","img/summit-ia/diego-perino.jpg","Director del BSC AI Institut","ponent","Barcelona Supercomputing Center (BSC)"],
