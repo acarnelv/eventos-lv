@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ponentes del Summit IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --c-lv:#ebc5dc;          /* La Vanguardia */
+    --c-ponent:#b1dbdb;      /* Ponent */
+    --c-moderador:#f8e3ae;   /* Moderador/a */
+    --c-presentadora:#f4cfb7;/* Presentadora */
+    --text:#333;
+  }
+  html,body{margin:0;padding:0;background:#fff;}
+  body{font-family:'Barlow',Arial,sans-serif;color:var(--text);}
+  .wrap{max-width:800px;margin:0 auto;padding:0 0 8px;}
+  h1{font-size:26px;font-weight:700;color:#000;margin:0 0 10px;line-height:1.15;}
+  .legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin:0 0 14px;font-weight:600;font-size:15px;}
+  .legend span{display:inline-flex;align-items:center;gap:5px;}
+  .legend i{display:inline-block;width:10px;height:15px;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .card{padding:16px 12px 22px;text-align:center;min-height:250px;box-sizing:border-box;}
+  .card img{display:block;width:78%;max-width:214px;aspect-ratio:1/1;object-fit:cover;object-position:center top;
+            border-radius:50%;margin:0 auto 12px;filter:grayscale(100%);background:#fff;color:transparent;}
+  .name{font-size:21px;font-weight:700;line-height:1.2;margin:0 0 10px;}
+  .org{font-size:16px;font-weight:400;line-height:1.3;margin:0 0 14px;color:#555;}
+  .role{font-size:14.5px;font-weight:700;line-height:1.3;margin:0;}
+  .t-lv{background:var(--c-lv);}
+  .t-ponent{background:var(--c-ponent);}
+  .t-moderador{background:var(--c-moderador);}
+  .t-presentadora{background:var(--c-presentadora);}
+  @media (max-width:560px){
+    h1{font-size:21px;}
+    .legend{font-size:13px;}
+    .grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+    .card{padding:12px 8px 16px;min-height:0;}
+    .name{font-size:17px;margin-bottom:6px;}
+    .org{font-size:14px;margin-bottom:8px;}
+    .role{font-size:13px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Ponentes del Summit IA</h1>
+  <div class="legend">
+    <span><i class="t-ponent"></i>Ponente</span>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<script>
+/* ====== DADES DELS PONENTS ======
+   Per canviar alguna cosa, només cal tocar aquesta llista.
+   tipus: "lv" (La Vanguardia), "ponent", "moderador", "presentadora"
+   Fotos: carpeta img/summit-ia/
+   Al càrrec, "<br>" força un salt de línia. */
+const PONENTS = [
+  ["Albert Tort Pugibet","img/summit-ia/albert-tort-pugibet.jpg","Secretario de Telecomunicaciones y Transformación Digital","ponent","Generalitat de Catalunya"],
+  ["Aleix Valls","img/summit-ia/aleix-valls.jpg","Curador del Summit IA y CEO","ponent","Weartificial"],
+  ["María García Gutiérrez","img/summit-ia/maria-garcia-gutierrez.jpg","Directora de AI Factory en el área CDO","ponent","Telefónica"],
+  ["Mireia Garcia Roca","img/summit-ia/mireia-garcia-roca.jpg","Directora de Transformación e IA","ponent","Hinojosa Packaging Group"],
+  ["Jordi Esparbe","img/summit-ia/jordi-esparbe.jpg","Manager de Soluciones Tecnológicas e Innovación IT","ponent","Naturgy"],
+  ["Miguel Ángel Román","img/summit-ia/miguel-angel-roman.jpg","Cofundador","ponent","Instituto de Inteligencia Artificial (IIA)"],
+  ["Jaume Miralles","img/summit-ia/jaume-miralles.jpg","Director general de Inteligencia Artificial, Eficiencia y Datos de la Administración","ponent","Generalitat de Catalunya"],
+  ["Diego Perino","img/summit-ia/diego-perino.jpg","Director del BSC AI Institut","ponent","Barcelona Supercomputing Center (BSC)"]
+];
+
+const grid = document.getElementById('grid');
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+PONENTS.forEach(([nom, foto, carrec, tipus, empresa]) => {
+  const card = document.createElement('div');
+  card.className = 'card t-' + tipus;
+  card.innerHTML =
+    '<img src="' + foto + '" alt="' + esc(nom) + '" loading="lazy">' +
+    '<p class="name">' + esc(nom) + '</p>' +
+    '<p class="org">' + esc(empresa) + '</p>' +
+    '<p class="role">' + esc(carrec).replace(/&lt;br&gt;/g,'<br>') + '</p>';
+  grid.appendChild(card);
+});
+</script>
+<!-- Mateix codi que ja feien servir els iframes a Xalok per ajustar l'alçada -->
+<script src="https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.9/js/iframeResizer.contentWindow.min.js"></script>
+</body>
+</html>
