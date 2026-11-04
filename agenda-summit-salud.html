@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda del Summit Salud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  body{font-family:'Roboto',Arial,sans-serif;color:#000;}
+  .wrap{max-width:800px;margin:0 auto;padding:10px 10px 8px;box-sizing:border-box;}
+  h1{font-size:22px;font-weight:700;margin:0 0 8px;line-height:1.2;}
+  .sub{font-size:15px;margin:0 0 14px;}
+  .sub .sep{color:#999;}
+  table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.4;}
+  td{vertical-align:top;padding:8px 10px;border-bottom:1px solid #ddd;}
+  tr:first-child td{border-top:1px solid #333;}
+  tr:last-child td{border-bottom:1px solid #333;}
+  tr:nth-child(even) td{background:#f4f4f4;}
+  td.h{width:88px;white-space:nowrap;border-right:1px solid #333;}
+  .notes{font-size:12px;margin:12px 0 0;}
+  @media (max-width:480px){
+    h1{font-size:19px;}
+    .sub{font-size:13px;}
+    table{font-size:12.5px;}
+    td{padding:7px 6px;}
+    td.h{width:62px;white-space:normal;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Agenda del <i>Summit Salud</i></h1>
+  <p class="sub">18 noviembre 2026 <span class="sep">|</span> De 9.30h a 15h</p>
+  <table><tbody id="agenda"></tbody></table>
+  <p class="notes">Agenda sujeta a cambios.</p>
+</div>
+
+<script>
+/* ====== DATOS DE LA AGENDA ======
+   Para cambiar algo, solo hay que tocar esta lista: ["hora", "texto"].
+   En el texto: **negrita**, *cursiva*, y "\n" para saltar de línea. */
+const AGENDA = [
+  ["09:30 - 10:00", "**Recepción de asistentes y café de bienvenida**"],
+  ["10:00 - 10:15", "**Bienvenida institucional**\nA cargo de **Enric Sierra**, *La Vanguardia*"],
+  ["10:15 - 11:15", "**Mesa redonda 1.** Diagnóstico 2026: ¿cuál es el estado de salud de la asistencia primaria en España?\n**Esther Nieto García**, presidenta de FAECAP\n**Andoni Lorenzo Garmendia**, presidente del Foro Español de Pacientes\n**José Polo García**, presidente de SEMERGEN\n**Antoni Sisó Almirall**, presidente de la Societat Catalana de Medicina Familiar i Comunitària (CAMFiC)\nModera: **Susana Quadrado**"],
+  ["11:15 - 11:45", "**Conferencia magistral**\nA cargo de **Manel del Castillo**, presidente de CAIROS"],
+  ["11:45 - 12:25", "**Pausa.** Coffee break y networking"],
+  ["12:25 - 12:45", "**Conversación 1:1.** Recursos y reformas: ¿necesita la asistencia primaria una terapia de choque o un tratamiento conservador?\nCon **Elvira Bisbe i Vives**, presidenta del Col·legi de Metges de Barcelona, y **Josep Corbella**, *La Vanguardia*"],
+  ["12:45 - 13:00", "**Conversación 1:1.** Innovación médica y excelencia asistencial: el futuro de la atención especializada\nCon el **Dr. Carlos Martín**, IMO Grupo Miranza"],
+  ["13:00 - 14:00", "**Mesa redonda 2.** Horizonte 2036: ¿cómo adaptar la asistencia primaria a las necesidades futuras?\n**Pilar Rodríguez Ledo**, presidenta de SEMG\n**Eduardo Satué de Velasco**, presidente saliente de la Sociedad Española de Salud Pública y Administración Sanitaria (SESPAS)\n**Tomás Fajardo**, vocal de la junta directiva de la Plataforma de Organizaciones de Pacientes (POP)\n**Mª Teresa Millán Rusillo**, directora de Asuntos Corporativos de Lilly\nModera: **Gabriel Trindade**"],
+  ["14:00 - 14:15", "**Clausura institucional**\nA cargo de **Olga Pané**, consellera de Salut de la Generalitat de Catalunya"],
+  ["14:15", "**Cóctel de clausura**"]
+];
+
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const md = s => esc(s)
+  .replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+  .replace(/\*(.+?)\*/g,'<i>$1</i>')
+  .replace(/\n/g,'<br>');
+const tb = document.getElementById('agenda');
+AGENDA.forEach(([hora, texto]) => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = '<td class="h">' + esc(hora) + '</td><td>' + md(texto) + '</td>';
+  tb.appendChild(tr);
+});
+</script>
+<!-- Mismo código que usan los iframes de Xalok para ajustar la altura -->
+<script src="https://cdn.jsdelivr.net/npm/iframe-resizer@4.3.9/js/iframeResizer.contentWindow.min.js"></script>
+</body>
+</html>
