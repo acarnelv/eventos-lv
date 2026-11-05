@@ -50,6 +50,7 @@ var COLLABORADORS = [
   {nom:'Ajuntament de Lloret de Mar', src:M+'09/lloret1.jpg'},
   {nom:'Ajuntament de Santa Coloma de Gramenet', src:M+'09/santa-coloma.jpg'},
   {nom:'Ajuntament de Mataró',     src:M+'09/mataro.jpg'},
+  {nom:'Ajuntament de Viladecans', src:'img/forum-futur-municipal/viladecans.jpg', h:40},
   {nom:'Veolia',                   src:M+'09/veolia.jpg'},
   {nom:'Ecoembes',                 src:M+'09/ecoembes.jpg'},
   {nom:'Benito',                   src:M+'09/benito.jpg'},
@@ -57,10 +58,12 @@ var COLLABORADORS = [
   {nom:'GBI Paprec',               src:M+'09/gbi-2.jpg'},
   {nom:'Federació de Municipis de Catalunya', src:M+'09/fmc.jpg'},
   {nom:'Associació Catalana de Municipis', src:M+'09/acm.jpg'},
-  {nom:'FCC Medio Ambiente',       src:M+'10/fcc.jpg'},
-  {nom:'Ajuntament de Viladecans', src:'img/forum-futur-municipal/viladecans.jpg', h:34}
+  {nom:'FCC Medio Ambiente',       src:M+'10/fcc.jpg'}
 ];
-var ORGANITZADORS = {nom:'La Vanguardia i RAC1', src:M+'09/racc1.jpg'};
+var ORGANITZADORS = [
+  {nom:'La Vanguardia', src:'img/forum-futur-municipal/lavanguardia.png', h:24},
+  {nom:'RAC1',          src:M+'09/racc1.jpg'}
+];
 
 /* ====== PINTAR ====== */
 function img(l){
@@ -72,7 +75,7 @@ for (var i = 0; i < COLLABORADORS.length; i += 3) {
   for (var j = i; j < i + 3; j++) html += '<td>' + (COLLABORADORS[j] ? img(COLLABORADORS[j]) : '') + '</td>';
   html += '</tr>';
 }
-html += '<tr class="org"><td class="label">Organitzat per:</td><td colspan="2">' + img(ORGANITZADORS) + '</td></tr>';
+html += '<tr class="org"><td class="label">Organitzat per:</td><td>' + img(ORGANITZADORS[0]) + '</td><td>' + img(ORGANITZADORS[1]) + '</td></tr>';
 document.getElementById('logos').innerHTML = html;
 </script>
 <script src="js/iframeResizer.contentWindow.js"></script>
