@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logos del Fòrum Futur Municipal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  body{font-family:'Roboto',Arial,sans-serif;color:#000;}
+  .wrap{max-width:600px;margin:0 auto;padding:10px 10px 8px;box-sizing:border-box;}
+  table{width:100%;border-collapse:collapse;table-layout:fixed;}
+  th{font-size:13px;font-weight:400;text-transform:uppercase;letter-spacing:.2px;
+     text-align:center;padding:8px 6px;border-bottom:2px solid #333;}
+  td{height:48px;padding:0 6px;text-align:center;vertical-align:middle;border-bottom:1px solid #ddd;}
+  td img{display:block;margin:0 auto;width:auto;max-width:100%;object-fit:contain;}
+  tr.org td{border-top:2px solid #333;border-bottom:1px solid #ddd;height:64px;}
+  td.label{font-size:13px;text-transform:uppercase;text-align:left;padding-left:10px;}
+  @media (max-width:480px){
+    td{height:42px;padding:0 4px;}
+    th,td.label{font-size:12px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <table>
+    <thead><tr><th colspan="3">Amb la col·laboració de:</th></tr></thead>
+    <tbody id="logos"></tbody>
+  </table>
+</div>
+
+<script>
+/* ====== LOGOS ======
+   Per afegir-ne un: una línia més a COLLABORADORS (src i, si cal, alçada en px).
+   S'ordenen de 3 en 3, d'esquerra a dreta. */
+var M = 'https://stories.lavanguardia.com/media/2026/';
+var COLLABORADORS = [
+  {nom:'Generalitat de Catalunya', src:M+'09/generalitat-1.jpg', h:23},
+  {nom:'Ajuntament de Barcelona',  src:M+'09/barcelona.jpg'},
+  {nom:'Ajuntament de Girona',     src:M+'09/girona.jpg'},
+  {nom:'Ajuntament de Lleida',     src:M+'09/lleida.jpg'},
+  {nom:'Ajuntament de Tarragona',  src:M+'09/tarragona.jpg'},
+  {nom:"Ajuntament de L'Hospitalet", src:M+'09/hospitalet.jpg'},
+  {nom:'Ajuntament de Salou',      src:M+'09/salou.jpg'},
+  {nom:'Ajuntament de Badalona',   src:M+'09/badalona.jpg'},
+  {nom:'Ajuntament de Manresa',    src:M+'09/manresa.jpg'},
+  {nom:'Ajuntament de Lloret de Mar', src:M+'09/lloret1.jpg'},
+  {nom:'Ajuntament de Santa Coloma de Gramenet', src:M+'09/santa-coloma.jpg'},
+  {nom:'Ajuntament de Mataró',     src:M+'09/mataro.jpg'},
+  {nom:'Veolia',                   src:M+'09/veolia.jpg'},
+  {nom:'Ecoembes',                 src:M+'09/ecoembes.jpg'},
+  {nom:'Benito',                   src:M+'09/benito.jpg'},
+  {nom:'Moventis',                 src:M+'10/moventis.jpg'},
+  {nom:'GBI Paprec',               src:M+'09/gbi-2.jpg'},
+  {nom:'Federació de Municipis de Catalunya', src:M+'09/fmc.jpg'},
+  {nom:'Associació Catalana de Municipis', src:M+'09/acm.jpg'},
+  {nom:'FCC Medio Ambiente',       src:M+'10/fcc.jpg'},
+  {nom:'Ajuntament de Viladecans', src:'img/forum-futur-municipal/viladecans.jpg', h:34}
+];
+var ORGANITZADORS = {nom:'La Vanguardia i RAC1', src:M+'09/racc1.jpg'};
+
+/* ====== PINTAR ====== */
+function img(l){
+  return '<img src="'+l.src+'" alt="'+l.nom.replace(/"/g,'&quot;')+'" style="height:'+(l.h||40)+'px">';
+}
+var html = '';
+for (var i = 0; i < COLLABORADORS.length; i += 3) {
+  html += '<tr>';
+  for (var j = i; j < i + 3; j++) html += '<td>' + (COLLABORADORS[j] ? img(COLLABORADORS[j]) : '') + '</td>';
+  html += '</tr>';
+}
+html += '<tr class="org"><td class="label">Organitzat per:</td><td colspan="2">' + img(ORGANITZADORS) + '</td></tr>';
+document.getElementById('logos').innerHTML = html;
+</script>
+<script src="js/iframeResizer.contentWindow.js"></script>
+<script src="js/amp-resize.js"></script>
+</body>
+</html>
