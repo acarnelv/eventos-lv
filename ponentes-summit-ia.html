@@ -6,93 +6,111 @@
 <title>Ponentes del Summit IA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* ===== Colores del evento (sacados de la creatividad del Summit IA) ===== */
   :root{
-    --c-lv:#ebc5dc;          /* La Vanguardia */
-    --c-ponent:#b1dbdb;      /* Ponent */
-    --c-moderador:#f8e3ae;   /* Moderador/a */
-    --c-presentadora:#f4cfb7;/* Presentadora */
-    --c-curador:#d6cdf0;     /* Curador (Summit IA) */
-    --text:#333;
+    --c1:#223a6b;      /* azul títulos */
+    --c2:#6358b1;      /* lila */
+    --bg1:#fbf8fc; --bg2:#e6cfe9; --bg3:#c9c6e7;   /* degradado cabecera */
+    --txt:#111; --grey:#5f6470; --rule:#cfcfd6;
   }
   html,body{margin:0;padding:0;background:#fff;}
-  body{font-family:'Barlow',Arial,sans-serif;color:var(--text);}
+  body{font-family:'Figtree',Arial,sans-serif;color:var(--txt);}
   .wrap{max-width:800px;margin:0 auto;padding:0 0 8px;}
-  h1{font-size:26px;font-weight:700;color:#000;margin:0 0 10px;line-height:1.15;}
-  .legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin:0 0 14px;font-weight:600;font-size:15px;}
-  .legend span{display:inline-flex;align-items:center;gap:5px;}
-  .legend i{display:inline-block;width:10px;height:15px;}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-  .card{padding:16px 12px 22px;text-align:center;min-height:250px;box-sizing:border-box;}
-  .card img{display:block;width:78%;max-width:214px;aspect-ratio:1/1;object-fit:cover;object-position:center top;
-            border-radius:50%;margin:0 auto 12px;filter:grayscale(100%);background:#fff;color:transparent;}
-  .name{font-size:21px;font-weight:700;line-height:1.2;margin:0 0 10px;}
-  .org{font-size:16px;font-weight:400;line-height:1.3;margin:0 0 14px;color:#555;}
-  .role{font-size:14.5px;font-weight:700;line-height:1.3;margin:0;}
-  .t-lv{background:var(--c-lv);}
-  .t-ponent{background:var(--c-ponent);}
-  .t-moderador{background:var(--c-moderador);}
-  .t-presentadora{background:var(--c-presentadora);}
-  .t-curador{background:var(--c-curador);}
-  @media (max-width:560px){
-    h1{font-size:21px;}
-    .legend{font-size:13px;}
-    .grid{grid-template-columns:repeat(2,1fr);gap:10px;}
-    .card{padding:12px 8px 16px;min-height:0;}
-    .name{font-size:17px;margin-bottom:6px;}
-    .org{font-size:14px;margin-bottom:8px;}
-    .role{font-size:13px;}
+
+  /* Cabecera */
+  .head{position:relative;overflow:hidden;padding:22px 22px 24px;border-radius:4px;
+        background:linear-gradient(115deg,var(--bg1) 0%,var(--bg2) 55%,var(--bg3) 100%);}
+  .head .wave{position:absolute;right:-30px;top:-20px;height:250px;mix-blend-mode:multiply;
+        -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 45%);mask-image:linear-gradient(90deg,transparent 0,#000 45%);}
+  .head .logo{position:relative;display:block;height:46px;margin-bottom:14px;}
+  .head h1{position:relative;margin:0;font-weight:800;font-size:31px;line-height:1.02;letter-spacing:-.6px;color:var(--c1);}
+  .head h1 span{color:var(--c2);}
+  .head p{position:relative;margin:10px 0 0;font-size:14px;color:var(--c1);}
+  .head p b{font-weight:700;}
+
+  /* Secciones */
+  .section{display:flex;align-items:center;gap:10px;margin:24px 0 14px;}
+  .section span{font-weight:700;font-size:12.5px;color:var(--c1);white-space:nowrap;}
+  .section::after{content:"";flex:1;border-top:1px solid var(--rule);}
+
+  /* Fichas */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 14px;}
+  .c img{display:block;width:84px;height:84px;border-radius:50%;object-fit:cover;background:#e9e1f2;margin:0 0 10px;}
+  .name{font-weight:700;font-size:15px;line-height:1.15;margin:0 0 4px;text-wrap:balance;}
+  .org{font-weight:700;font-size:11.5px;line-height:1.25;color:var(--c2);margin:0 0 3px;}
+  .rl{text-transform:uppercase;letter-spacing:.6px;font-weight:800;}
+  .cargo{font-weight:400;font-size:12px;line-height:1.3;color:var(--grey);margin:0;}
+
+  /* Conducen: uno al lado del otro, foto a la izquierda */
+  #cond{grid-template-columns:1fr 1fr;gap:14px;}
+  #cond .c{display:flex;gap:12px;align-items:center;}
+  #cond .c img{margin:0;flex:none;}
+
+  .foot{margin-top:18px;padding-top:10px;border-top:1px solid var(--rule);font-size:11px;color:var(--grey);}
+
+  @media (max-width:440px){
+    .head{padding:18px 16px 20px;}
+    .head h1{font-size:26px;}
+    .head .logo{height:40px;}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    #cond{grid-template-columns:1fr;}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Ponentes del Summit IA</h1>
-  <div class="legend">
-    <span><i class="t-curador"></i>Curador</span>
-    <span><i class="t-presentadora"></i>Presentador</span>
-    <span><i class="t-ponent"></i>Ponente</span>
+  <div class="head">
+    <img class="wave" src="img/summit-ia/cabecera-onda.jpg" alt="">
+    <img class="logo" src="img/summit-ia/logo-summit-ia.png" alt="Summit IA · La Vanguardia">
+    <h1>Ponentes del<br><span>Summit IA</span></h1>
+    <p><b>Martes, 10 de noviembre</b> · IDEAL Barcelona</p>
   </div>
+
+  <div class="section"><span>Conducen el encuentro</span></div>
+  <div class="grid" id="cond"></div>
+
+  <div class="section"><span>Entre los participantes</span></div>
   <div class="grid" id="grid"></div>
+
+  <div class="foot">Programa sujeto a cambios.</div>
 </div>
 
 <script>
-/* ====== DADES DELS PONENTS ======
-   Per canviar alguna cosa, només cal tocar aquesta llista.
-   tipus: "lv" (La Vanguardia), "curador", "ponent", "moderador", "presentadora"
-   Fotos: carpeta img/summit-ia/
-   Al càrrec, "<br>" força un salt de línia. */
-const PONENTS = [
-  ["Aleix Valls","img/summit-ia/aleix-valls.jpg","Curador del Summit IA y CEO","curador","Weartificial"],
-  ["Martí Paola","img/summit-ia/marti-paola.jpg","Periodista de La Vanguardia","presentadora","La Vanguardia"],
-  ["Albert Tort Pugibet","img/summit-ia/albert-tort-pugibet.jpg","Secretario de Telecomunicaciones y Transformación Digital","ponent","Generalitat de Catalunya"],
-  ["Jaume Miralles","img/summit-ia/jaume-miralles.jpg","Director general de Inteligencia Artificial, Eficiencia y Datos de la Administración","ponent","Generalitat de Catalunya"],
-  ["Julián López-Arenas","img/summit-ia/julian-lopez-arenas.jpg","Director de Competitividad","ponent","Cámara de Comercio de España"],
-  ["Daniel Martinez","img/summit-ia/daniel-martinez.jpg","SVP y director del Centro Internacional de HP Barcelona y responsable del HP IA Innovation Hub","ponent","HP"],
-  ["Alberto López Santamaría","img/summit-ia/alberto-lopez-santamaria.jpg","Director de Data & IA - Capacidades Estructurales de Mapfre España","ponent","MAPFRE"],
-  ["Toni Durán","img/summit-ia/toni-duran.jpg","Director de Innovación","ponent","Abertis"],
-  ["María García Gutiérrez","img/summit-ia/maria-garcia-gutierrez.jpg","Directora de AI Factory en el área CDO","ponent","Telefónica"],
-  ["Miguel Ángel Román","img/summit-ia/miguel-angel-roman.jpg","Cofundador","ponent","Instituto de Inteligencia Artificial (IIA)"],
-  ["Diego Perino","img/summit-ia/diego-perino.jpg","Director del BSC AI Institut","ponent","Barcelona Supercomputing Center (BSC)"],
-  ["Mireia Garcia Roca","img/summit-ia/mireia-garcia-roca.jpg","Directora de Transformación e IA","ponent","Hinojosa Packaging Group"],
-  ["Jordi Esparbe","img/summit-ia/jordi-esparbe.jpg","Manager de Soluciones Tecnológicas e Innovación IT","ponent","Naturgy"]
+/* ====== DATOS DE LOS PONENTES ======
+   Para cambiar algo, solo hay que tocar esta lista.
+   [nombre, foto, cargo, tipo, empresa]
+   tipo: "curador" o "presentador" (van arriba, en «Conducen el encuentro») o "ponente".
+   Fotos: img/summit-ia/circulo/ (recortadas sobre fondo lila, 300x300). */
+const PONENTES = [
+  ["Aleix Valls","aleix-valls","Curador del Summit IA y CEO","curador","Weartificial"],
+  ["Martí Paola","marti-paola","Periodista de La Vanguardia","presentador","La Vanguardia"],
+  ["Albert Tort Pugibet","albert-tort-pugibet","Secretario de Telecomunicaciones y Transformación Digital","ponente","Generalitat de Catalunya"],
+  ["Jaume Miralles","jaume-miralles","Director general de Inteligencia Artificial, Eficiencia y Datos de la Administración","ponente","Generalitat de Catalunya"],
+  ["Julián López-Arenas","julian-lopez-arenas","Director de Competitividad","ponente","Cámara de Comercio de España"],
+  ["Daniel Martinez","daniel-martinez","SVP y director del Centro Internacional de HP Barcelona y responsable del HP IA Innovation Hub","ponente","HP"],
+  ["Alberto López Santamaría","alberto-lopez-santamaria","Director de Data & IA - Capacidades Estructurales de Mapfre España","ponente","MAPFRE"],
+  ["Toni Durán","toni-duran","Director de Innovación","ponente","Abertis"],
+  ["María García Gutiérrez","maria-garcia-gutierrez","Directora de AI Factory en el área CDO","ponente","Telefónica"],
+  ["Miguel Ángel Román","miguel-angel-roman","Cofundador","ponente","Instituto de Inteligencia Artificial (IIA)"],
+  ["Diego Perino","diego-perino","Director del BSC AI Institut","ponente","Barcelona Supercomputing Center (BSC)"],
+  ["Mireia Garcia Roca","mireia-garcia-roca","Directora de Transformación e IA","ponente","Hinojosa Packaging Group"],
+  ["Jordi Esparbe","jordi-esparbe","Manager de Soluciones Tecnológicas e Innovación IT","ponente","Naturgy"]
 ];
 
-const grid = document.getElementById('grid');
+const ROL = {curador:"Curador", presentador:"Presentador"};
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-PONENTS.forEach(([nom, foto, carrec, tipus, empresa]) => {
-  const card = document.createElement('div');
-  card.className = 'card t-' + tipus;
-  card.innerHTML =
-    '<img src="' + foto + '" alt="' + esc(nom) + '" loading="lazy">' +
-    '<p class="name">' + esc(nom) + '</p>' +
-    '<p class="org">' + esc(empresa) + '</p>' +
-    '<p class="role">' + esc(carrec).replace(/&lt;br&gt;/g,'<br>') + '</p>';
-  grid.appendChild(card);
+PONENTES.forEach(([nom, foto, cargo, tipo, empresa]) => {
+  const rol = ROL[tipo] ? '<span class="rl">' + ROL[tipo] + '</span><br>' : '';
+  const html =
+    '<div class="c"><img src="img/summit-ia/circulo/' + foto + '.jpg" alt="' + esc(nom) + '">' +
+    '<div><p class="name">' + esc(nom) + '</p>' +
+    '<p class="org">' + rol + esc(empresa) + '</p>' +
+    '<p class="cargo">' + esc(cargo) + '</p></div></div>';
+  document.getElementById(ROL[tipo] ? 'cond' : 'grid').insertAdjacentHTML('beforeend', html);
 });
 </script>
-<!-- Mateix codi que ja feien servir els iframes a Xalok per ajustar l'alçada -->
 <script src="js/amp-resize.js"></script>
 <script src="js/iframeResizer.contentWindow.js"></script>
 </body>
