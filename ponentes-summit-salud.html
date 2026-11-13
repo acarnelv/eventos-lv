@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ponentes del Summit Salud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ===== Colores del evento (sacados de la creatividad del Summit Salud) ===== */
+  :root{
+    --c1:#223b6d;      /* azul marino (Summit) */
+    --c2:#3f86cf;      /* azul claro (Salud) */
+    --c3:#67abe1;      /* azul del logo */
+    --bg1:#f3f8fd; --bg2:#e3eff9; --bg3:#cfe2f4;   /* degradado cabecera */
+    --txt:#111; --grey:#5c6577; --rule:#cfd8e3;
+  }
+  html,body{margin:0;padding:0;background:#fff;}
+  body{font-family:'Figtree',Arial,sans-serif;color:var(--txt);}
+  .wrap{max-width:800px;margin:0 auto;padding:0 0 8px;}
+  .body{padding:0 18px;}
+
+  /* Cabecera */
+  .head{position:relative;overflow:hidden;padding:22px 22px 24px;border-radius:4px;
+        background:linear-gradient(115deg,var(--bg1) 0%,var(--bg2) 55%,var(--bg3) 100%);}
+  /* Arcos como los de la creatividad */
+  .head .arc{position:absolute;border-radius:50%;pointer-events:none;}
+  .head .a1{width:420px;height:420px;right:-170px;top:-150px;background:rgba(103,171,225,.18);}
+  .head .a2{width:300px;height:300px;right:-90px;top:-70px;border:14px solid rgba(103,171,225,.35);}
+  .head .a3{width:520px;height:520px;right:-250px;top:-230px;border:1px solid rgba(34,59,109,.12);}
+  .head .logo{position:relative;display:block;height:50px;margin-bottom:16px;}
+  .head .ed{position:relative;margin:0 0 6px;font-size:11.5px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--c1);}
+  .head h1{position:relative;margin:0;font-weight:800;font-size:31px;line-height:1.02;letter-spacing:-.6px;color:var(--c1);}
+  .head h1 span{color:var(--c2);}
+  .head p.when{position:relative;margin:10px 0 0;font-size:14px;color:var(--c1);}
+  .head p.when b{font-weight:700;}
+  .head .bar{position:relative;width:34px;height:2px;background:var(--c3);margin:12px 0 0;}
+
+  /* Secciones */
+  .section{display:flex;align-items:center;gap:10px;margin:24px 0 14px;}
+  .section span{font-weight:700;font-size:12.5px;color:var(--c1);white-space:nowrap;}
+  .section::after{content:"";flex:1;border-top:1px solid var(--rule);}
+
+  /* Fichas */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 14px;}
+  .ini{display:flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:50%;background:#dfe9f4;
+        color:var(--c1);font-weight:700;font-size:24px;margin:0 0 10px;}
+  #lv .c .ini{margin:0;flex:none;width:72px;height:72px;font-size:20px;}
+  .c img{display:block;width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:center top;
+background:#e3eff9;margin:0 0 10px;}
+  .name{font-weight:700;font-size:15px;line-height:1.15;margin:0 0 4px;text-wrap:balance;color:var(--c1);}
+  .org{font-weight:700;font-size:11.5px;line-height:1.25;color:var(--c2);margin:0 0 3px;}
+  .rl{text-transform:uppercase;letter-spacing:.6px;font-weight:800;}
+  .cargo{font-weight:400;font-size:12px;line-height:1.3;color:var(--grey);margin:0;}
+
+  /* La Vanguardia: foto a la izquierda */
+  #lv{gap:16px 14px;}
+  #lv .c{display:flex;gap:12px;align-items:center;}
+  #lv .c img{margin:0;flex:none;width:72px;height:72px;}
+
+  .foot{margin-top:18px;padding-top:10px;border-top:1px solid var(--rule);font-size:11px;color:var(--grey);}
+
+  @media (max-width:560px){
+    #lv{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:440px){
+    .head{padding:18px 16px 20px;}
+    .head h1{font-size:26px;}
+    .head .logo{height:42px;}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    #lv{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="arc a3"></div><div class="arc a1"></div><div class="arc a2"></div>
+    <img class="logo" src="img/summit-salud/logo-summit-salud.png" alt="Summit Salud · La Vanguardia">
+    <p class="ed">2.ª edición</p>
+    <h1>Ponentes del<br><span>Summit Salud</span></h1>
+    <p class="when"><b>Miércoles, 18 de noviembre</b> · Auditorio Miranza IMO, Barcelona</p>
+    <div class="bar"></div>
+  </div>
+
+  <div class="body">
+  <div class="section"><span>Entre los participantes</span></div>
+  <div class="grid" id="grid"></div>
+
+  <div class="section"><span>Conducen la jornada</span></div>
+  <div class="grid" id="lv"></div>
+
+  <div class="foot">Programa sujeto a cambios.</div>
+  </div>
+</div>
+
+<script>
+/* ====== DATOS DE LOS PONENTES ======
+   Para cambiar algo, solo hay que tocar esta lista.
+   [nombre, foto, cargo, tipo, empresa]
+   tipo: "ponente" (bloque principal) o "bienvenida" / "modera" (bloque de La Vanguardia, al final).
+   Fotos: img/summit-salud/ (600x600, en color).
+   Si la foto va vacía (""), sale un círculo con las iniciales hasta que llegue. */
+const PONENTES = [
+  ["Olga Pané","olga-pane","Consellera de Salut","ponente","Generalitat de Catalunya"],
+  ["Dr. Carlos Martín","carlos-martin","Director médico de Miranza Manresa","ponente","IMO Grupo Miranza"],
+  ["M.ª Teresa Millán Rusillo","teresa-millan-rusillo","Directora de Asuntos Corporativos","ponente","Lilly"],
+  ["Manel del Castillo","manel-del-castillo","Presidente de CAIROS y director gerente del Hospital Sant Joan de Déu","ponente","CAIROS · Hospital Sant Joan de Déu"],
+  ["Esther Nieto García","esther-nieto-garcia","Presidenta","ponente","Federación de Asociaciones de Enfermería Comunitaria y Atención Primaria (FAECAP)"],
+  ["Santiago Alfonso Zamora","santiago-alfonso-zamora","Vicepresidente","ponente","Foro Español de Pacientes"],
+  ["José Polo García","jose-polo-garcia","Presidente","ponente","Sociedad Española de Médicos de Atención Primaria (SEMERGEN)"],
+  ["Antoni Sisó Almirall","antoni-siso-almirall","Presidente","ponente","Societat Catalana de Medicina Familiar i Comunitària (CAMFiC)"],
+  ["Elvira Bisbe i Vives","elvira-bisbe-i-vives","Presidenta","ponente","Col·legi de Metges de Barcelona (CoMB)"],
+  ["Pilar Rodríguez Ledo","pilar-rodriguez-ledo","Presidenta","ponente","Sociedad Española de Médicos Generales y de Familia (SEMG)"],
+  ["Eduardo Satué de Velasco","eduardo-satue-de-velasco","Presidente saliente","ponente","Sociedad Española de Salud Pública y Administración Sanitaria (SESPAS)"],
+  ["Tomás Fajardo","tomas-fajardo","Vocal de la junta directiva","ponente","Plataforma de Organizaciones de Pacientes (POP)"],
+  ["Enric Sierra","enric-sierra","Vicedirector","bienvenida","La Vanguardia"],
+  ["Susana Quadrado","susana-quadrado","Periodista","modera","La Vanguardia"],
+  ["Josep Corbella","josep-corbella","Periodista","modera","La Vanguardia"],
+  ["Martí Paola","marti-paola","Periodista","modera","La Vanguardia"],
+  ["Gabriel Trindade","gabriel-trindade","Periodista","modera","La Vanguardia"]
+];
+
+const ROL = {bienvenida:"Bienvenida", modera:"Modera"};
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+PONENTES.forEach(([nom, foto, cargo, tipo, empresa]) => {
+  const rol = ROL[tipo] ? '<span class="rl">' + ROL[tipo] + '</span><br>' : '';
+  const html =
+    '<div class="c">' + (foto
+      ? '<img src="img/summit-salud/' + foto + '.jpg" alt="' + esc(nom) + '">'
+      : '<div class="ini">' + nom.split(' ').filter(w => /^[A-ZÁÉÍÓÚÀÈÒ]/.test(w)).slice(0,2).map(w => w[0]).join('') + '</div>') +
+    '<div><p class="name">' + esc(nom) + '</p>' +
+    '<p class="org">' + rol + esc(empresa) + '</p>' +
+    '<p class="cargo">' + esc(cargo) + '</p></div></div>';
+  document.getElementById(ROL[tipo] ? 'lv' : 'grid').insertAdjacentHTML('beforeend', html);
+});
+</script>
+<script src="js/amp-resize.js"></script>
+<script src="js/iframeResizer.contentWindow.js"></script>
+</body>
+</html>
