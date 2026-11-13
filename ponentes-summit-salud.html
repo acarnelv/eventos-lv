@@ -19,6 +19,7 @@
   html,body{margin:0;padding:0;background:#fff;}
   body{font-family:'Figtree',Arial,sans-serif;color:var(--txt);}
   .wrap{max-width:800px;margin:0 auto;padding:0 0 8px;}
+  .body{padding:0 18px;}
 
   /* Cabecera */
   .head{position:relative;overflow:hidden;padding:22px 22px 24px;border-radius:4px;
@@ -43,6 +44,9 @@
 
   /* Fichas */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 14px;}
+  .ini{display:flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:50%;background:#dfe9f4;
+        color:var(--c1);font-weight:700;font-size:24px;margin:0 0 10px;}
+  #lv .c .ini{margin:0;flex:none;width:72px;height:72px;font-size:20px;}
   .c img{display:block;width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:center top;
          filter:grayscale(100%);background:#e3eff9;margin:0 0 10px;}
   .name{font-weight:700;font-size:15px;line-height:1.15;margin:0 0 4px;text-wrap:balance;color:var(--c1);}
@@ -80,13 +84,15 @@
     <div class="bar"></div>
   </div>
 
+  <div class="body">
   <div class="section"><span>Entre los participantes</span></div>
   <div class="grid" id="grid"></div>
 
-  <div class="section"><span>Bienvenida y moderación</span></div>
+  <div class="section"><span>Conducen la jornada</span></div>
   <div class="grid" id="lv"></div>
 
   <div class="foot">Programa sujeto a cambios.</div>
+  </div>
 </div>
 
 <script>
@@ -94,14 +100,15 @@
    Para cambiar algo, solo hay que tocar esta lista.
    [nombre, foto, cargo, tipo, empresa]
    tipo: "ponente" (bloque principal) o "bienvenida" / "modera" (bloque de La Vanguardia, al final).
-   Fotos: img/summit-salud/ (600x600, en color; el blanco y negro lo pone el CSS). */
+   Fotos: img/summit-salud/ (600x600, en color; el blanco y negro lo pone el CSS).
+   Si la foto va vacía (""), sale un círculo con las iniciales hasta que llegue. */
 const PONENTES = [
   ["Olga Pané","olga-pane","Consellera de Salut","ponente","Generalitat de Catalunya"],
   ["Dr. Carlos Martín","carlos-martin","Director médico de Miranza Manresa","ponente","IMO Grupo Miranza"],
   ["M.ª Teresa Millán Rusillo","teresa-millan-rusillo","Directora de Asuntos Corporativos","ponente","Lilly"],
   ["Manel del Castillo","manel-del-castillo","Presidente de CAIROS y director gerente del Hospital Sant Joan de Déu","ponente","CAIROS · Hospital Sant Joan de Déu"],
   ["Esther Nieto García","esther-nieto-garcia","Presidenta","ponente","Federación de Asociaciones de Enfermería Comunitaria y Atención Primaria (FAECAP)"],
-  ["Andoni Lorenzo Garmendia","andoni-lorenzo-garmendia","Presidente","ponente","Foro Español de Pacientes"],
+  ["Santiago Alfonso Zamora","","Vicepresidente","ponente","Foro Español de Pacientes"],
   ["José Polo García","jose-polo-garcia","Presidente","ponente","Sociedad Española de Médicos de Atención Primaria (SEMERGEN)"],
   ["Antoni Sisó Almirall","antoni-siso-almirall","Presidente","ponente","Societat Catalana de Medicina Familiar i Comunitària (CAMFiC)"],
   ["Elvira Bisbe i Vives","elvira-bisbe-i-vives","Presidenta","ponente","Col·legi de Metges de Barcelona (CoMB)"],
@@ -120,7 +127,9 @@ const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;
 PONENTES.forEach(([nom, foto, cargo, tipo, empresa]) => {
   const rol = ROL[tipo] ? '<span class="rl">' + ROL[tipo] + '</span><br>' : '';
   const html =
-    '<div class="c"><img src="img/summit-salud/' + foto + '.jpg" alt="' + esc(nom) + '">' +
+    '<div class="c">' + (foto
+      ? '<img src="img/summit-salud/' + foto + '.jpg" alt="' + esc(nom) + '">'
+      : '<div class="ini">' + nom.split(' ').filter(w => /^[A-ZÁÉÍÓÚÀÈÒ]/.test(w)).slice(0,2).map(w => w[0]).join('') + '</div>') +
     '<div><p class="name">' + esc(nom) + '</p>' +
     '<p class="org">' + rol + esc(empresa) + '</p>' +
     '<p class="cargo">' + esc(cargo) + '</p></div></div>';
