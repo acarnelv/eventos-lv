@@ -11,51 +11,44 @@
   /* Colors del logo del Fòrum (mapa) i del programa */
   :root{
     --verd:#76a287; --groc:#fcca67; --taronja:#f5a351; --vermell:#d55c3c;
-    --terracota:#b5452f; --crema:#f8eae7; --text:#1d1d1b; --gris:#6b6b6b;
+    --terracota:#b5452f; --text:#1d1d1b;
   }
   html,body{margin:0;padding:0;background:#fff;}
   body{font-family:'Inter',Arial,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;}
   .wrap{max-width:800px;margin:0 auto;padding:8px 2px 10px;}
-  .head{display:flex;align-items:center;gap:14px;padding-bottom:12px;border-bottom:2px solid var(--terracota);margin-bottom:12px;}
+  .head{display:flex;align-items:center;gap:14px;padding-bottom:12px;border-bottom:2px solid var(--terracota);margin-bottom:14px;}
   .head img{width:46px;height:auto;flex:none;}
   .kicker{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--terracota);margin:0 0 3px;}
   h1{font-family:'Source Serif 4',Georgia,serif;font-size:28px;font-weight:600;margin:0;line-height:1.1;}
   h1 i{font-style:normal;color:var(--terracota);}
-  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 16px;font-size:13px;font-weight:500;color:var(--gris);}
-  .legend span{display:inline-flex;align-items:center;gap:6px;}
-  .legend i{display:inline-block;width:11px;height:11px;border-radius:50%;}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-  .card{--c:var(--verd);position:relative;background:#fff;border:1px solid #eadcd8;border-top:6px solid var(--c);
-        border-radius:4px;padding:18px 12px 20px;text-align:center;box-sizing:border-box;
-        background:linear-gradient(180deg,color-mix(in srgb,var(--c) 16%,#fff) 0,#fff 62%);}
-  .ph{width:74%;max-width:200px;aspect-ratio:1/1;margin:0 auto 14px;border-radius:50%;padding:5px;box-sizing:border-box;
-      background:conic-gradient(var(--c) 0 100%);}
-  .ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;
-          border:4px solid #fff;box-sizing:border-box;filter:grayscale(100%);background:#fff;color:transparent;}
-  .name{font-family:'Source Serif 4',Georgia,serif;font-size:21px;font-weight:600;line-height:1.15;margin:0 0 8px;}
-  .org{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;line-height:1.4;margin:0 0 10px;color:var(--terracota);}
-  .role{font-size:13.5px;font-weight:400;line-height:1.35;margin:0;color:#3a3a3a;}
-  .tag{position:absolute;top:10px;right:10px;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-       padding:3px 7px;border-radius:20px;background:var(--c);color:#fff;}
-  .t-lv{--c:var(--vermell);}
-  .t-ponent{--c:var(--verd);}
-  .t-moderador{--c:var(--groc);}
-  .t-moderador .tag{color:var(--text);}
-  .t-presentadora{--c:var(--taronja);}
-  .foot{display:flex;height:5px;margin-top:16px;border-radius:3px;overflow:hidden;}
+  /* Mosaic: rajoles de colors del logo, juntes blanques, fotos retallades com les peces del mapa */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+  .card{position:relative;background:var(--c);padding:34px 14px 22px;text-align:center;box-sizing:border-box;}
+  .c0{--c:var(--verd);} .c1{--c:var(--groc);} .c2{--c:var(--taronja);} .c3{--c:var(--vermell);}
+  .ph{width:76%;max-width:205px;margin:0 auto 14px;
+      filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff);}
+  .ph img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;background:#eee;color:transparent;}
+  .s0 img{clip-path:polygon(10% 0,100% 7%,93% 100%,0 89%);}
+  .s1 img{clip-path:polygon(0 9%,88% 0,100% 90%,8% 100%);}
+  .s2 img{clip-path:polygon(5% 4%,100% 0,95% 95%,0 100%);}
+  .s3 img{clip-path:polygon(0 0,94% 10%,100% 100%,9% 93%);}
+  .name{font-family:'Source Serif 4',Georgia,serif;font-size:21px;font-weight:700;line-height:1.15;margin:0 0 8px;}
+  .org{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.4;margin:0 0 9px;opacity:.75;}
+  .role{font-size:13.5px;font-weight:500;line-height:1.35;margin:0;}
+  .tag{position:absolute;top:10px;left:10px;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+       padding:4px 8px;background:#fff;color:var(--text);}
+  .foot{display:flex;height:5px;margin-top:14px;}
   .foot b{flex:1;}
   @media (max-width:560px){
     .head img{width:38px;}
     h1{font-size:22px;}
-    .legend{font-size:12px;gap:4px 12px;}
-    .grid{grid-template-columns:repeat(2,1fr);gap:10px;}
-    .card{padding:14px 8px 16px;}
-    .ph{width:80%;padding:4px;}
-    .ph img{border-width:3px;}
+    .grid{grid-template-columns:repeat(2,1fr);gap:5px;}
+    .card{padding:28px 8px 16px;}
+    .ph{width:80%;}
     .name{font-size:17px;margin-bottom:6px;}
     .org{font-size:9.5px;letter-spacing:.08em;margin-bottom:7px;}
     .role{font-size:12.5px;}
-    .tag{display:none;}
+    .tag{top:7px;left:7px;font-size:8.5px;padding:3px 6px;}
   }
 </style>
 </head>
@@ -68,12 +61,6 @@
       <h1>Ponents del <i>Fòrum Futur Municipal</i></h1>
     </div>
   </div>
-  <div class="legend">
-    <span><i style="background:var(--vermell)"></i>La Vanguardia</span>
-    <span><i style="background:var(--verd)"></i>Ponent</span>
-    <span><i style="background:var(--groc)"></i>Moderador/a</span>
-    <span><i style="background:var(--taronja)"></i>Presentadora</span>
-  </div>
   <div class="grid" id="grid"></div>
   <div class="foot"><b style="background:var(--verd)"></b><b style="background:var(--groc)"></b><b style="background:var(--taronja)"></b><b style="background:var(--vermell)"></b></div>
 </div>
@@ -81,7 +68,8 @@
 <script>
 /* ====== DADES DELS PONENTS ======
    Per canviar alguna cosa, només cal tocar aquesta llista.
-   tipus: "lv" (La Vanguardia), "ponent", "moderador", "presentadora"
+   tipus: "lv" (La Vanguardia), "ponent", "moderador", "presentadora" (surt com a etiqueta blanca; els ponents no en porten)
+   El color de cada rajola va per ordre (verd, groc, taronja, vermell) per fer l'efecte mosaic.
    Al càrrec, "<br>" força un salt de línia. */
 const PONENTS = [
   ["Jordi Juan","https://stories.lavanguardia.com/media/2026/09/jordijuan.jpg","Director de<br>La Vanguardia","lv","La Vanguardia"],
@@ -121,13 +109,13 @@ const PONENTS = [
 
 const grid = document.getElementById('grid');
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const ETIQ = {lv:"La Vanguardia", ponent:"Ponent", moderador:"Modera", presentadora:"Presenta"};
-PONENTS.forEach(([nom, foto, carrec, tipus, empresa]) => {
+const ETIQ = {lv:"La Vanguardia", moderador:"Modera", presentadora:"Presenta"};
+PONENTS.forEach(([nom, foto, carrec, tipus, empresa], i) => {
   const card = document.createElement('div');
-  card.className = 'card t-' + tipus;
+  card.className = 'card c' + (i % 4);
   card.innerHTML =
-    '<span class="tag">' + ETIQ[tipus] + '</span>' +
-    '<div class="ph"><img src="' + foto + '" alt="' + esc(nom) + '" loading="lazy"></div>' +
+    (ETIQ[tipus] ? '<span class="tag">' + ETIQ[tipus] + '</span>' : '') +
+    '<div class="ph s' + ((i * 3 + 1) % 4) + '"><img src="' + foto + '" alt="' + esc(nom) + '" loading="lazy"></div>' +
     '<p class="name">' + esc(nom) + '</p>' +
     '<p class="org">' + esc(empresa) + '</p>' +
     '<p class="role">' + esc(carrec).replace(/&lt;br&gt;/g,'<br>') + '</p>';
