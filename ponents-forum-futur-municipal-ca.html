@@ -24,11 +24,13 @@
   /* Rajola partida: foto a sang, tall en diagonal i rajola de color del logo; franja de 4 colors al peu */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
   .card{position:relative;overflow:hidden;background:var(--c);display:flex;flex-direction:column;}
-  .c0{--c:var(--verd);} .c1{--c:var(--groc);} .c2{--c:var(--taronja);} .c3{--c:var(--vermell);}
-  .ph img{display:block;width:100%;aspect-ratio:1/0.95;object-fit:cover;object-position:center top;background:#e9e2df;color:transparent;
-          clip-path:polygon(0 0,100% 0,100% 84%,0 100%);}
-  .s1 img{clip-path:polygon(0 0,100% 0,100% 100%,0 84%);}
-  .txt{padding:2px 14px 16px;margin-top:-4px;flex:1;}
+  .t-lv{--c:var(--vermell);} .t-ponent{--c:var(--verd);} .t-moderador{--c:var(--groc);} .t-presentadora{--c:var(--taronja);}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 14px;font-size:13px;font-weight:600;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .legend i{display:inline-block;width:12px;height:12px;}
+  .ph img{display:block;width:100%;aspect-ratio:1/0.9;object-fit:cover;object-position:center top;background:#e9e2df;color:transparent;
+}
+  .txt{padding:12px 14px 16px;flex:1;}
   .name{font-family:'Source Serif 4',Georgia,serif;font-size:20px;font-weight:700;line-height:1.15;margin:0 0 7px;}
   .org{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.4;margin:0 0 7px;opacity:.72;}
   .role{font-size:13px;font-weight:500;line-height:1.35;margin:0;}
@@ -42,7 +44,8 @@
     .head img{width:38px;}
     h1{font-size:22px;}
     .grid{grid-template-columns:repeat(2,1fr);gap:6px;}
-    .txt{padding:2px 9px 12px;}
+    .txt{padding:9px 9px 12px;}
+    .legend{font-size:12px;gap:4px 12px;}
     .name{font-size:16.5px;margin-bottom:5px;}
     .org{font-size:9px;letter-spacing:.07em;margin-bottom:5px;}
     .role{font-size:12px;}
@@ -60,6 +63,12 @@
       <h1>Ponents del <i>Fòrum Futur Municipal</i></h1>
     </div>
   </div>
+  <div class="legend">
+    <span><i style="background:var(--vermell)"></i>La Vanguardia</span>
+    <span><i style="background:var(--verd)"></i>Ponent</span>
+    <span><i style="background:var(--groc)"></i>Moderador/a</span>
+    <span><i style="background:var(--taronja)"></i>Presentadora</span>
+  </div>
   <div class="grid" id="grid"></div>
   <div class="foot"><b style="background:var(--verd)"></b><b style="background:var(--groc)"></b><b style="background:var(--taronja)"></b><b style="background:var(--vermell)"></b></div>
 </div>
@@ -67,8 +76,7 @@
 <script>
 /* ====== DADES DELS PONENTS ======
    Per canviar alguna cosa, només cal tocar aquesta llista.
-   tipus: "lv" (La Vanguardia), "ponent", "moderador", "presentadora" (moderadors i presentadora porten etiqueta blanca; La Vanguardia i ponents no)
-   El color de cada rajola va per ordre (verd, groc, taronja, vermell) per fer l'efecte mosaic.
+   tipus: "lv" (La Vanguardia), "ponent", "moderador", "presentadora" → color de la fitxa: vermell, verd, groc, taronja
    Al càrrec, "<br>" força un salt de línia. */
 const PONENTS = [
   ["Jordi Juan","https://stories.lavanguardia.com/media/2026/09/jordijuan.jpg","Director de<br>La Vanguardia","lv","La Vanguardia"],
@@ -108,14 +116,12 @@ const PONENTS = [
 
 const grid = document.getElementById('grid');
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const ETIQ = {moderador:"Modera", presentadora:"Presenta"};
 const TILES = '<div class="tiles"><b style="background:var(--verd)"></b><b style="background:var(--groc);flex:.6"></b><b style="background:var(--taronja);flex:1.4"></b><b style="background:var(--vermell);flex:.8"></b></div>';
 PONENTS.forEach(([nom, foto, carrec, tipus, empresa], i) => {
   const card = document.createElement('div');
-  card.className = 'card c' + (i % 4);
+  card.className = 'card t-' + tipus;
   card.innerHTML =
-    (ETIQ[tipus] ? '<span class="tag">' + ETIQ[tipus] + '</span>' : '') +
-    '<div class="ph s' + (i % 2) + '"><img src="' + foto + '" alt="' + esc(nom) + '" loading="lazy"></div>' +
+    '<div class="ph"><img src="' + foto + '" alt="' + esc(nom) + '" loading="lazy"></div>' +
     '<div class="txt"><p class="name">' + esc(nom) + '</p>' +
     '<p class="org">' + esc(empresa) + '</p>' +
     '<p class="role">' + esc(carrec).replace(/&lt;br&gt;/g,'<br>') + '</p></div>' + TILES;
