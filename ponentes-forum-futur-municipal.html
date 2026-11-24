@@ -3,11 +3,132 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ponentes del Fórum Futur Municipal</title>
-<style>html,body{margin:0;padding:0;background:#fff;}</style>
+<title>Ponentes del Fòrum Futur Municipal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Colors del logo del Fòrum (mapa) i del programa */
+  :root{
+    --verd:#76a287; --groc:#fcca67; --taronja:#f5a351; --vermell:#d55c3c;
+    --terracota:#b5452f; --text:#1d1d1b;
+  }
+  html,body{margin:0;padding:0;background:#fff;}
+  body{font-family:'Inter',Arial,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:800px;margin:0 auto;padding:8px 2px 10px;}
+  .head{display:flex;align-items:center;gap:14px;padding-bottom:12px;border-bottom:2px solid var(--terracota);margin-bottom:14px;}
+  .head img{width:46px;height:auto;flex:none;}
+  .kicker{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--terracota);margin:0 0 3px;}
+  h1{font-family:'Source Serif 4',Georgia,serif;font-size:28px;font-weight:600;margin:0;line-height:1.1;}
+  h1 i{font-style:normal;color:var(--terracota);}
+  /* Rajola partida: foto a sang, tall en diagonal i rajola de color del logo; franja de 4 colors al peu */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .card{position:relative;overflow:hidden;background:var(--c);display:flex;flex-direction:column;}
+  .t-lv{--c:var(--vermell);} .t-ponent{--c:var(--verd);} .t-moderador{--c:var(--groc);} .t-presentadora{--c:var(--taronja);}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 14px;font-size:13px;font-weight:600;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .legend i{display:inline-block;width:12px;height:12px;}
+  .ph img{display:block;width:100%;aspect-ratio:1/0.9;object-fit:cover;object-position:center top;background:#e9e2df;color:transparent;
+}
+  .txt{padding:12px 14px 16px;flex:1;}
+  .name{font-family:'Source Serif 4',Georgia,serif;font-size:20px;font-weight:700;line-height:1.15;margin:0 0 7px;}
+  .org{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.4;margin:0 0 7px;opacity:.72;}
+  .role{font-size:13px;font-weight:500;line-height:1.35;margin:0;}
+  .tag{position:absolute;top:9px;left:9px;z-index:2;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+       padding:4px 8px;background:#fff;color:var(--text);}
+  .tiles{display:flex;height:7px;}
+  .tiles b{flex:1;}
+  .foot{display:flex;height:5px;margin-top:14px;}
+  .foot b{flex:1;}
+  @media (max-width:560px){
+    .head img{width:38px;}
+    h1{font-size:22px;}
+    .grid{grid-template-columns:repeat(2,1fr);gap:6px;}
+    .txt{padding:9px 9px 12px;}
+    .legend{font-size:12px;gap:4px 12px;}
+    .name{font-size:16.5px;margin-bottom:5px;}
+    .org{font-size:9px;letter-spacing:.07em;margin-bottom:5px;}
+    .role{font-size:12px;}
+    .tag{top:6px;left:6px;font-size:8.5px;padding:3px 6px;}
+    .tiles{height:5px;}
+  }
+</style>
 </head>
 <body>
-<div class="flourish-embed flourish-cards" data-src="visualisation/30725633"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/30725633/thumbnail" width="100%" alt="cards visualization" /></noscript></div>
+<div class="wrap">
+  <div class="head">
+    <img src="img/forum-futur-municipal/mapa.png" alt="">
+    <div>
+      <p class="kicker">1.ª edición · 1 de diciembre de 2026</p>
+      <h1>Ponentes del <i>Fòrum Futur Municipal</i></h1>
+    </div>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--vermell)"></i>La Vanguardia</span>
+    <span><i style="background:var(--verd)"></i>Ponente</span>
+    <span><i style="background:var(--groc)"></i>Moderador/a</span>
+    <span><i style="background:var(--taronja)"></i>Presentadora</span>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="foot"><b style="background:var(--verd)"></b><b style="background:var(--groc)"></b><b style="background:var(--taronja)"></b><b style="background:var(--vermell)"></b></div>
+</div>
+
+<script>
+/* ====== DATOS DE LOS PONENTES ======
+   Per canviar alguna cosa, només cal tocar aquesta llista.
+   tipus: "lv" (La Vanguardia), "ponent", "moderador", "presentadora" → color de la fitxa: vermell, verd, groc, taronja
+   Al càrrec, "<br>" força un salt de línia. */
+const PONENTS = [
+  ["Jordi Juan", "https://stories.lavanguardia.com/media/2026/09/jordijuan.jpg", "Director de<br>La Vanguardia", "lv", "La Vanguardia"],
+  ["Enric Sierra", "https://stories.lavanguardia.com/media/2026/10/sierra1.jpg", "Vicedirector de<br>La Vanguardia", "lv", "La Vanguardia"],
+  ["Albert Dalmau", "https://stories.lavanguardia.com/media/2026/10/dalmau.jpg", "Conseller de la Presidencia de la Generalitat", "ponent", "Generalitat de Catalunya"],
+  ["Jaume Collboni", "https://stories.lavanguardia.com/media/2026/09/jaume-collboni.jpg", "Alcalde de Barcelona", "ponent", "Ayuntamiento de Barcelona"],
+  ["Lluc Salellas i Vilar", "https://stories.lavanguardia.com/media/2026/10/salellas.jpg", "Alcalde de Girona", "ponent", "Ayuntamiento de Girona"],
+  ["Fèlix Larrosa", "https://stories.lavanguardia.com/media/2026/09/larrossa.jpg", "Alcalde de Lleida", "ponent", "Ayuntamiento de Lleida"],
+  ["Rubén Viñuales Elías", "https://stories.lavanguardia.com/media/2026/09/vinyuales.jpg", "Alcalde de Tarragona", "ponent", "Ayuntamiento de Tarragona"],
+  ["David Quirós Brito", "https://stories.lavanguardia.com/media/2026/09/quiros.jpg", "Alcalde de L’Hospitalet de Llobregat", "ponent", "Ayuntamiento de L’Hospitalet de Llobregat"],
+  ["Pere Granados", "https://www.lavanguardia.com/uploads/2026/11/03/6aea0e1c0e672.jpeg", "Alcalde de Salou", "ponent", "Ayuntamiento de Salou"],
+  ["Xavier García Albiol", "https://stories.lavanguardia.com/media/2026/09/albiol.jpg", "Alcalde de Badalona", "ponent", "Ayuntamiento de Badalona"],
+  ["Marc Aloy Guàrdia", "https://stories.lavanguardia.com/media/2026/10/manresa-alcalde.jpg", "Alcalde de Manresa", "ponent", "Ayuntamiento de Manresa"],
+  ["Adrià Lamelas Martínez", "https://stories.lavanguardia.com/media/2026/09/lamelas.jpg", "Alcalde de Lloret de Mar", "ponent", "Ayuntamiento de Lloret de Mar"],
+  ["Mireia González Sáez", "https://stories.lavanguardia.com/media/2026/09/gonzalez.jpg", "Alcaldesa de Santa Coloma de Gramenet", "ponent", "Ayuntamiento de Santa Coloma de Gramenet"],
+  ["David Bote Paz", "https://stories.lavanguardia.com/media/2026/10/david-bote.jpg", "Alcalde de Mataró", "ponent", "Ayuntamiento de Mataró"],
+  ["Marta Farrés Falgueras", "https://stories.lavanguardia.com/media/2026/10/marta-farres.jpg", "Alcaldesa de Sabadell", "ponent", "Ayuntamiento de Sabadell"],
+  ["Antonio Balmón Arévalo", "https://public.flourish.studio/uploads/3748220/54617412-e246-4970-9969-63d82385bef6.jpg", "Alcalde de Cornellà de Llobregat", "ponent", "Ayuntamiento de Cornellà de Llobregat"],
+  ["Filo Cañete", "https://public.flourish.studio/uploads/3748220/d92102b4-8e80-42f9-b187-c59f1367acd4.jpg", "Alcaldesa de Sant Adrià de Besòs", "ponent", "Ayuntamiento de Sant Adrià de Besòs"],
+  ["Olga Morales", "img/forum-futur-municipal/olga-morales.jpg", "Alcaldesa de Viladecans", "ponent", "Ayuntamiento de Viladecans"],
+  ["Felipe Campos", "https://stories.lavanguardia.com/media/2026/10/felipe-campos.jpg", "Consejero delegado de Aigües de Barcelona", "ponent", "Veolia"],
+  ["Xavier Balagué", "https://stories.lavanguardia.com/media/2026/10/xavi-balague.jpg", "Gerente de Catalunya, Comunidad Valenciana y Baleares de Ecoembes", "ponent", "Ecoembes"],
+  ["Mateu Homs", "https://stories.lavanguardia.com/media/2026/10/mateu-homs.jpg", "Director ejecutivo de Benito", "ponent", "Benito"],
+  ["Josep Maria Martí", "https://stories.lavanguardia.com/media/2026/10/josep-maria-moventis.jpg", "Presidente de Moventia", "ponent", "Moventia"],
+  ["Marta Ciurana Paradera", "https://stories.lavanguardia.com/media/2026/10/marta-ciurana.jpg", "Directora general de GBI Paprec", "ponent", "GBI"],
+  ["Meritxell Budó", "https://stories.lavanguardia.com/media/2026/09/budo.jpg", "Presidenta de la ACM", "ponent", "Associació Catalana de Municipis (ACM)"],
+  ["Jaume Gilabert", "https://stories.lavanguardia.com/media/2026/10/jaume-gilabert.jpg", "Alcalde de Montgai", "ponent", "Coordinadora d’Eines de Repoblament Rural"],
+  ["Carles Sala", "https://stories.lavanguardia.com/media/2026/10/carles-sala.jpg", "Vicesecretario general técnico de la Associació de Promotors de Catalunya (APCE)", "ponent", "Associació de Promotors de Catalunya (APCE)"],
+  ["Jordi Ferrando Cuadradas", "https://public.flourish.studio/uploads/3748220/b2ab2c1d-8e5f-4d5f-bbf8-e693b1760719.jpg", "Director Zona Nordeste de FCC Medio Ambiente", "ponent", "FCC"],
+  ["Fermín Gómez Esteban", "https://www.lavanguardia.com/uploads/2026/10/28/6ae21863deb3f.jpeg", "Director de Copisa Integra", "ponent", "Copisa"],
+  ["Cristina Puig", "https://stories.lavanguardia.com/media/2026/06/cristina-puig-300x300.jpg", "Periodista de La Vanguardia", "presentadora", "La Vanguardia"],
+  ["Xavi Bundó", "https://stories.lavanguardia.com/media/2026/10/xavi-bundo.jpg", "Periodista de RAC1", "moderador", "RAC1"],
+  ["Sara Sans", "https://stories.lavanguardia.com/media/2026/09/sarasans.jpg", "Periodista de La Vanguardia", "moderador", "La Vanguardia"],
+  ["David Guerrero", "img/forum-futur-municipal/david-guerrero.jpg", "Periodista de La Vanguardia", "moderador", "La Vanguardia"],
+  ["Toni Muñoz", "https://stories.lavanguardia.com/media/2026/09/tonimunoz.jpg", "Periodista de La Vanguardia", "moderador", "La Vanguardia"]
+];
+
+const grid = document.getElementById('grid');
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const TILES = '<div class="tiles"><b style="background:var(--verd)"></b><b style="background:var(--groc);flex:.6"></b><b style="background:var(--taronja);flex:1.4"></b><b style="background:var(--vermell);flex:.8"></b></div>';
+PONENTS.forEach(([nom, foto, carrec, tipus, empresa], i) => {
+  const card = document.createElement('div');
+  card.className = 'card t-' + tipus;
+  card.innerHTML =
+    '<div class="ph"><img src="' + foto + '" alt="' + esc(nom) + '" loading="lazy"></div>' +
+    '<div class="txt"><p class="name">' + esc(nom) + '</p>' +
+    '<p class="org">' + esc(empresa) + '</p>' +
+    '<p class="role">' + esc(carrec).replace(/&lt;br&gt;/g,'<br>') + '</p></div>' + TILES;
+  grid.appendChild(card);
+});
+</script>
+<!-- Mateix codi que ja feien servir els iframes a Xalok per ajustar l'alçada -->
 <script src="js/amp-resize.js"></script>
 <script src="js/iframeResizer.contentWindow.js"></script>
 </body>
