@@ -6,54 +6,76 @@
 <title>Ponents del Fòrum Futur Municipal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* Colors del logo del Fòrum (mapa) i del programa */
   :root{
-    --c-lv:#ebc5dc;          /* La Vanguardia */
-    --c-ponent:#b1dbdb;      /* Ponent */
-    --c-moderador:#f8e3ae;   /* Moderador/a */
-    --c-presentadora:#f4cfb7;/* Presentadora */
-    --text:#333;
+    --verd:#76a287; --groc:#fcca67; --taronja:#f5a351; --vermell:#d55c3c;
+    --terracota:#b5452f; --crema:#f8eae7; --text:#1d1d1b; --gris:#6b6b6b;
   }
   html,body{margin:0;padding:0;background:#fff;}
-  body{font-family:'Barlow',Arial,sans-serif;color:var(--text);}
-  .wrap{max-width:800px;margin:0 auto;padding:0 0 8px;}
-  h1{font-size:26px;font-weight:700;color:#000;margin:0 0 10px;line-height:1.15;}
-  .legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin:0 0 14px;font-weight:600;font-size:15px;}
-  .legend span{display:inline-flex;align-items:center;gap:5px;}
-  .legend i{display:inline-block;width:10px;height:15px;}
+  body{font-family:'Inter',Arial,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:800px;margin:0 auto;padding:8px 2px 10px;}
+  .head{display:flex;align-items:center;gap:14px;padding-bottom:12px;border-bottom:2px solid var(--terracota);margin-bottom:12px;}
+  .head img{width:46px;height:auto;flex:none;}
+  .kicker{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--terracota);margin:0 0 3px;}
+  h1{font-family:'Source Serif 4',Georgia,serif;font-size:28px;font-weight:600;margin:0;line-height:1.1;}
+  h1 i{font-style:normal;color:var(--terracota);}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 16px;font-size:13px;font-weight:500;color:var(--gris);}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:50%;}
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-  .card{padding:16px 12px 22px;text-align:center;min-height:250px;box-sizing:border-box;}
-  .card img{display:block;width:78%;max-width:214px;aspect-ratio:1/1;object-fit:cover;object-position:center top;
-            border-radius:50%;margin:0 auto 12px;filter:grayscale(100%);background:#fff;color:transparent;}
-  .name{font-size:21px;font-weight:700;line-height:1.2;margin:0 0 10px;}
-  .org{font-size:16px;font-weight:400;line-height:1.3;margin:0 0 14px;color:#555;}
-  .role{font-size:14.5px;font-weight:700;line-height:1.3;margin:0;}
-  .t-lv{background:var(--c-lv);}
-  .t-ponent{background:var(--c-ponent);}
-  .t-moderador{background:var(--c-moderador);}
-  .t-presentadora{background:var(--c-presentadora);}
+  .card{--c:var(--verd);position:relative;background:#fff;border:1px solid #eadcd8;border-top:6px solid var(--c);
+        border-radius:4px;padding:18px 12px 20px;text-align:center;box-sizing:border-box;
+        background:linear-gradient(180deg,color-mix(in srgb,var(--c) 16%,#fff) 0,#fff 62%);}
+  .ph{width:74%;max-width:200px;aspect-ratio:1/1;margin:0 auto 14px;border-radius:50%;padding:5px;box-sizing:border-box;
+      background:conic-gradient(var(--c) 0 100%);}
+  .ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;
+          border:4px solid #fff;box-sizing:border-box;filter:grayscale(100%);background:#fff;color:transparent;}
+  .name{font-family:'Source Serif 4',Georgia,serif;font-size:21px;font-weight:600;line-height:1.15;margin:0 0 8px;}
+  .org{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;line-height:1.4;margin:0 0 10px;color:var(--terracota);}
+  .role{font-size:13.5px;font-weight:400;line-height:1.35;margin:0;color:#3a3a3a;}
+  .tag{position:absolute;top:10px;right:10px;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+       padding:3px 7px;border-radius:20px;background:var(--c);color:#fff;}
+  .t-lv{--c:var(--vermell);}
+  .t-ponent{--c:var(--verd);}
+  .t-moderador{--c:var(--groc);}
+  .t-moderador .tag{color:var(--text);}
+  .t-presentadora{--c:var(--taronja);}
+  .foot{display:flex;height:5px;margin-top:16px;border-radius:3px;overflow:hidden;}
+  .foot b{flex:1;}
   @media (max-width:560px){
-    h1{font-size:21px;}
-    .legend{font-size:13px;}
+    .head img{width:38px;}
+    h1{font-size:22px;}
+    .legend{font-size:12px;gap:4px 12px;}
     .grid{grid-template-columns:repeat(2,1fr);gap:10px;}
-    .card{padding:12px 8px 16px;min-height:0;}
+    .card{padding:14px 8px 16px;}
+    .ph{width:80%;padding:4px;}
+    .ph img{border-width:3px;}
     .name{font-size:17px;margin-bottom:6px;}
-    .org{font-size:14px;margin-bottom:8px;}
-    .role{font-size:13px;}
+    .org{font-size:9.5px;letter-spacing:.08em;margin-bottom:7px;}
+    .role{font-size:12.5px;}
+    .tag{display:none;}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Ponents del Fòrum Futur Municipal</h1>
+  <div class="head">
+    <img src="img/forum-futur-municipal/mapa.png" alt="">
+    <div>
+      <p class="kicker">1a edició · 1 de desembre de 2026</p>
+      <h1>Ponents del <i>Fòrum Futur Municipal</i></h1>
+    </div>
+  </div>
   <div class="legend">
-    <span><i class="t-lv"></i>La Vanguardia</span>
-    <span><i class="t-ponent"></i>Ponent</span>
-    <span><i class="t-moderador"></i>Moderador/a</span>
-    <span><i class="t-presentadora"></i>Presentadora</span>
+    <span><i style="background:var(--vermell)"></i>La Vanguardia</span>
+    <span><i style="background:var(--verd)"></i>Ponent</span>
+    <span><i style="background:var(--groc)"></i>Moderador/a</span>
+    <span><i style="background:var(--taronja)"></i>Presentadora</span>
   </div>
   <div class="grid" id="grid"></div>
+  <div class="foot"><b style="background:var(--verd)"></b><b style="background:var(--groc)"></b><b style="background:var(--taronja)"></b><b style="background:var(--vermell)"></b></div>
 </div>
 
 <script>
@@ -86,7 +108,7 @@ const PONENTS = [
   ["Josep Maria Martí","https://stories.lavanguardia.com/media/2026/10/josep-maria-moventis.jpg","President de Moventia","ponent","Moventia"],
   ["Marta Ciurana Paradera","https://stories.lavanguardia.com/media/2026/10/marta-ciurana.jpg","Directora general de GBI Paprec","ponent","GBI"],
   ["Meritxell Budó","https://stories.lavanguardia.com/media/2026/09/budo.jpg","Presidenta de l’ACM","ponent","Associació Catalana de Municipis (ACM)"],
-  ["Jaume Gilabert","https://stories.lavanguardia.com/media/2026/10/jaume-gilabert.jpg","Alcalde de Mongai","ponent","Coordinadora d’Eines de Repoblament Rural"],
+  ["Jaume Gilabert","https://stories.lavanguardia.com/media/2026/10/jaume-gilabert.jpg","Alcalde de Montgai","ponent","Coordinadora d’Eines de Repoblament Rural"],
   ["Carles Sala","https://stories.lavanguardia.com/media/2026/10/carles-sala.jpg","Vicesecretari general tècnic de l’Associació de Promotors de Catalunya (APCE)","ponent","Associació de Promotors de Catalunya (APCE)"],
   ["Jordi Ferrando Cuadradas","https://public.flourish.studio/uploads/3748220/b2ab2c1d-8e5f-4d5f-bbf8-e693b1760719.jpg","Director Zona Nord-est de FCC Medio Ambiente","ponent","FCC"],
   ["Fermín Gómez Esteban","https://www.lavanguardia.com/uploads/2026/10/28/6ae21863deb3f.jpeg","Director de Copisa Integra","ponent","Copisa"],
@@ -99,11 +121,13 @@ const PONENTS = [
 
 const grid = document.getElementById('grid');
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const ETIQ = {lv:"La Vanguardia", ponent:"Ponent", moderador:"Modera", presentadora:"Presenta"};
 PONENTS.forEach(([nom, foto, carrec, tipus, empresa]) => {
   const card = document.createElement('div');
   card.className = 'card t-' + tipus;
   card.innerHTML =
-    '<img src="' + foto + '" alt="' + esc(nom) + '" loading="lazy">' +
+    '<span class="tag">' + ETIQ[tipus] + '</span>' +
+    '<div class="ph"><img src="' + foto + '" alt="' + esc(nom) + '" loading="lazy"></div>' +
     '<p class="name">' + esc(nom) + '</p>' +
     '<p class="org">' + esc(empresa) + '</p>' +
     '<p class="role">' + esc(carrec).replace(/&lt;br&gt;/g,'<br>') + '</p>';
