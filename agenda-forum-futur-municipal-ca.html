@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda del Fòrum Futur Municipal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#fff;}
+  body{font-family:'Roboto',Arial,sans-serif;color:#000;}
+  .wrap{max-width:800px;margin:0 auto;padding:10px 10px 8px;box-sizing:border-box;}
+  h1{font-size:22px;font-weight:700;margin:0 0 8px;line-height:1.2;}
+  .sub{font-size:15px;margin:0 0 14px;}
+  .sub .sep{color:#999;}
+  table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.4;}
+  td{vertical-align:top;padding:8px 10px;border-bottom:1px solid #ddd;}
+  tr:first-child td{border-top:1px solid #333;}
+  tr:last-child td{border-bottom:1px solid #333;}
+  tr:nth-child(even) td{background:#f4f4f4;}
+  td.h{width:88px;white-space:nowrap;border-right:1px solid #333;}
+  .notes{font-size:12px;margin:12px 0 0;}
+  @media (max-width:480px){
+    h1{font-size:19px;}
+    .sub{font-size:13px;}
+    table{font-size:12.5px;}
+    td{padding:7px 6px;}
+    td.h{width:62px;white-space:normal;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Agenda del <i>Fòrum Futur Municipal</i></h1>
+  <p class="sub">1 de desembre de 2026 <span class="sep">|</span> De 8.45 h a 14.40 h</p>
+  <table><tbody id="agenda"></tbody></table>
+  <p class="notes">Agenda subjecta a canvis.</p>
+</div>
+
+<script>
+/* ====== DATOS DE LA AGENDA ======
+   Para cambiar algo, solo hay que tocar esta lista: ["hora", "texto"].
+   En el texto: **negrita**, *cursiva*, y "\n" para saltar de línea. */
+const AGENDA = [
+  ["08:45 - 09:15", "**Recepció de convidats i cafè de benvinguda**"],
+  ["09:15 - 09:30", "**Presentació i benvinguda institucional**\nA càrrec de **Cristina Puig** i **Jordi Juan**, director de *La Vanguardia*"],
+  ["09:30 - 09:50", "**Conferència inaugural**\nA càrrec de **Joan Clos**, exdirector d'ONU-Hàbitat, exministre i exalcalde de Barcelona"],
+  ["09:50 - 09:55", "**Bloc 1.** Mobilitat. Introducció\nA càrrec de **Meritxell Budó**, presidenta de l'ACM"],
+  ["09:55 - 10:30", "**Bloc 1.** Mobilitat. Taula rodona\n**Lluc Salellas i Vilar**, alcalde de Girona\n**Adrià Lamelas Martínez**, alcalde de Lloret de Mar\n**David Quirós Brito**, alcalde de l'Hospitalet de Llobregat\nModera: **David Guerrero**"],
+  ["10:30 - 10:35", "**Bloc 2.** Seguretat. Introducció\nA càrrec de **Xavier García Albiol**, alcalde de Badalona"],
+  ["10:35 - 11:10", "**Bloc 2.** Seguretat. Taula rodona\n**Fèlix Larrosa Piqué**, alcalde de Lleida\n**Marc Aloy Guàrdia**, alcalde de Manresa\n**Marta Farrés Falgueras**, alcaldessa de Sabadell\n**Filo Cañete**, alcaldessa de Sant Adrià de Besòs\nModera: **Toni Muñoz**"],
+  ["11:10 - 11:50", "**Pausa.** Cafè networking"],
+  ["11:50 - 12:00", "**Bloc 3.** Habitatge. Ponència institucional\nA càrrec de **Jaume Collboni**, alcalde de Barcelona"],
+  ["12:00 - 12:05", "**Bloc 3.** Habitatge. Introducció\nA càrrec de **David Bote**, alcalde de Mataró i president de la FMC"],
+  ["12:05 - 12:40", "**Bloc 3.** Habitatge. Taula rodona\n**Pere Granados**, alcalde de Salou\n**Rubén Viñuales Elías**, alcalde de Tarragona\n**Mireia González Sáez**, alcaldessa de Santa Coloma de Gramenet\n**Olga Morales**, alcaldessa de Viladecans\nModera: **Xavi Bundó**"],
+  ["12:40 - 12:55", "**Bloc 4.** Col·laboració publicoprivada. Ponència empresarial: la visió empresarial davant els reptes de la ciutat i l'habitatge\nA càrrec de **Carles Sala**, vicesecretari general tècnic de l'APCE"],
+  ["12:55 - 13:25", "**Bloc 4.** Col·laboració publicoprivada. Taula I: la ciutat que volem: mobilitat, espai públic i qualitat de vida\n**Mateu Homs**, director executiu de Benito\n**Josep Maria Martí**, president de Moventia\n**Felipe Campos**, conseller delegat d'Aigües de Barcelona\n**Marta Ciurana Paradera**, directora general de GBI Paprec\nModera: **Mireia Garolera**"],
+  ["13:25 - 13:55", "**Bloc 4.** Col·laboració publicoprivada. Taula II: el futur dels serveis urbans: aigua, circularitat i sostenibilitat\n**Xavier Balagué**, responsable de Relacions amb Administracions Locals i Regionals a Catalunya d'Ecoembes\n**Jordi Ferrando Cuadradas**, director de la Zona Nordest d'FCC Medi Ambient\n**Fermín Gómez Esteban**, director de l'Àrea Industrial de Grupo COPISA\nModera: **Sara Sans**"],
+  ["13:55 - 14:05", "**Bloc 5.** Representació municipal. Ponència en representació dels municipis grans\nA càrrec d'**Antoni Balmón**, alcalde de Cornellà de Llobregat i vicepresident de l'AMB"],
+  ["14:05 - 14:15", "**Bloc 5.** Representació municipal. Ponència en representació de 540 municipis petits\nA càrrec de **Jaume Gilabert**, alcalde de Montgai"],
+  ["14:15 - 14:35", "**Bloc 6.** Entrevista institucional\nAmb **Albert Dalmau**, conseller de la Presidència de la Generalitat de Catalunya, a càrrec d'**Enric Sierra**"],
+  ["14:35 - 14:40", "**Cloenda**\nA càrrec de *La Vanguardia*"],
+  ["14:40", "**Còctel networking**"]
+];
+
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const md = s => esc(s)
+  .replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+  .replace(/\*(.+?)\*/g,'<i>$1</i>')
+  .replace(/\n/g,'<br>');
+const tb = document.getElementById('agenda');
+AGENDA.forEach(([hora, texto]) => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = '<td class="h">' + esc(hora) + '</td><td>' + md(texto) + '</td>';
+  tb.appendChild(tr);
+});
+</script>
+<!-- Mismo código que usan los iframes de Xalok para ajustar la altura -->
+<script src="js/amp-resize.js"></script>
+<script src="js/iframeResizer.contentWindow.js"></script>
+</body>
+</html>
